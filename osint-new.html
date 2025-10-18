@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Intelligence Gathering | CyberSec Academy</title>
+    <meta name="keywords" content="OSINT training, open source intelligence, online investigation, digital footprint analysis, social media intelligence, geolocation techniques, metadata extraction, dark web investigation, corporate intelligence, personal information gathering, advanced Google searching, reverse image search, email investigation, username hunting">
+    <meta name="description" content="Master the art of Open Source Intelligence (OSINT) gathering with this comprehensive course covering search techniques, image analysis, social media investigation, and more.">
+    <meta property="og:title" content="OSINT Intelligence Gathering - CyberSec Academy">
+    <meta property="og:description" content="Learn to find information that doesn't want to be found. Master the art of gathering intelligence from public sources.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-green: #00ff41;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --card-bg: rgba(15, 15, 25, 0.8);
+            --text-color: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(10, 80, 120, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(0, 255, 65, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(0, 240, 255, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(5, 5, 8, 0.9);
+            border-bottom: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+        
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-green);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+        
+        /* Course Hero Section - ENHANCED WITH LOGO */
+        .course-hero {
+            margin-top: 100px;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        .course-logo-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .course-logo {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 252, 0.4));
+            border: 2px solid rgba(0, 240, 252, 0.3);
+            padding: 15px;
+            background: rgba(5, 5, 15, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            border-radius: 20px;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+        
+        .course-logo-container:hover .logo-glow {
+            opacity: 1;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        
+        .logo-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green), var(--neon-blue)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .course-logo-container:hover .logo-border {
+            opacity: 1;
+        }
+        
+        .course-logo-container:hover .course-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(0, 240, 252, 0.8));
+            border-color: var(--neon-blue);
+        }
+        
+        .course-hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 240, 252, 0.5);
+        }
+        
+        .course-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #b0b0b0;
+        }
+        
+        .progress-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.1);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--darker-bg);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            border-radius: 5px;
+            width: 10%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+        
+        /* Course Content */
+        .course-content {
+            padding: 3rem 0;
+        }
+        
+        .modules-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        .modules-sidebar {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .modules-sidebar h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .modules-list {
+            list-style: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modules-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .modules-list::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+            border-radius: 10px;
+        }
+        
+        .modules-list::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+        }
+        
+        .module-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header {
+            background: var(--darker-bg);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--neon-green);
+            transition: all 0.3s;
+        }
+        
+        .section-header:hover {
+            background: rgba(0, 240, 252, 0.1);
+        }
+        
+        .section-header h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+            font-size: 1rem;
+        }
+        
+        .section-header i {
+            transition: transform 0.3s;
+        }
+        
+        .section-header.collapsed i {
+            transform: rotate(-90deg);
+        }
+        
+        .section-lessons {
+            list-style: none;
+            padding-left: 1rem;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .section-lessons.collapsed {
+            max-height: 0;
+        }
+        
+        .module-item {
+            padding: 1rem;
+            border-left: 3px solid transparent;
+            margin-bottom: 0.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-item:hover {
+            background: rgba(0, 240, 252, 0.1);
+            border-left-color: var(--neon-blue);
+        }
+        
+        .module-item.active {
+            background: rgba(0, 240, 252, 0.15);
+            border-left-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 240, 252, 0.2);
+        }
+        
+        .module-item.completed::before {
+            content: '✓';
+            color: var(--neon-green);
+            margin-right: 0.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+        
+        .module-number {
+            background: var(--darker-bg);
+            color: var(--neon-blue);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .module-item.active .module-number {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+        
+        .video-container {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container:hover {
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.2);
+            border-color: var(--neon-blue);
+        }
+        
+        .video-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .video-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .video-status {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-badge.completed {
+            background: rgba(0, 255, 65, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+        
+        .status-badge.in-progress {
+            background: rgba(0, 240, 252, 0.2);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+        }
+        
+        .video-player {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+        
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #0a0a12, #050508);
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .video-placeholder p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+        
+        .video-controls {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0, 240, 252, 0.3);
+        }
+        
+        .nav-button {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 0.7rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-button:hover {
+            background: rgba(0, 240, 252, 0.1);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-button:disabled:hover {
+            background: transparent;
+            box-shadow: none;
+        }
+        
+        /* Download Button Styles */
+        .download-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .download-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+        }
+        
+        .download-section p {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .download-button {
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 1rem 2.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .download-button:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
+            transform: translateY(-2px);
+        }
+        
+        .download-button i {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+        
+        .download-button:hover i {
+            transform: translateY(2px);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--neon-blue);
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 240, 252, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+        }
+        
+        .modal-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--neon-green);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            transform: translateX(150%);
+            transition: transform 0.5s;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+        }
+        
+        /* OSINT Tools Section */
+        .tools-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tools-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+            text-align: center;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: var(--darker-bg);
+            border: 1px solid rgba(0, 240, 252, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .tool-card i {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+        }
+        
+        .tool-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+        }
+        
+        /* Matrix Animation */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .modules-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modules-sidebar {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .course-hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .course-logo {
+                max-width: 100%;
+            }
+            
+            .video-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .download-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Animation Background -->
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-terminal"></i>
+                <h1>CYBERSEC ACADEMY</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#courses">Courses</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button" id="progressButton">My Progress</button>
+        </div>
+    </header>
+
+    <!-- Course Hero Section - ENHANCED WITH LOGO -->
+    <section class="course-hero">
+        <div class="container">
+            <!-- Course Logo with Glow Effects -->
+            <div class="course-logo-container">
+                <img src="Images/Osint-Course-Logo.png" alt="OSINT Mastery Course" class="course-logo">
+                <div class="logo-glow"></div>
+                <div class="logo-border"></div>
+            </div>
+            
+            <h2>OSINT INTELLIGENCE GATHERING</h2>
+            <p>Learn to find information that doesn't want to be found. Master the art of gathering intelligence from public sources.</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Course Progress</span>
+                    <span id="progressPercent">10%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content -->
+    <section class="course-content">
+        <div class="container">
+            <div class="modules-container">
+                <!-- Modules Sidebar -->
+                <div class="modules-sidebar">
+                    <h3>COURSE MODULES</h3>
+                    <div class="modules-list" id="modulesList">
+                        <!-- Modules will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Video Content -->
+                <div class="video-content">
+                    <div class="video-container">
+                        <div class="video-header">
+                            <h3 id="currentVideoTitle">Introduction: What is OSINT?</h3>
+                            <div class="video-status">
+                                <span class="status-badge in-progress">In Progress</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-player">
+                            <!-- VIDEO EMBED PLACEHOLDER - Will be updated by JavaScript -->
+                            <iframe id="videoFrame" src="https://archive.org/embed/13-website-osint_20251015/1-Introduction+What+is+OSINT.mp4" width="560" height="384" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen=""></iframe>
+                        </div>
+                        
+                        <div class="video-controls">
+                            <button class="nav-button" id="prevButton" disabled>
+                                <i class="fas fa-arrow-left"></i> Previous Lesson
+                            </button>
+                            <button class="nav-button" id="completeButton">
+                                <i class="fas fa-check"></i> Mark Complete
+                            </button>
+                            <button class="nav-button" id="nextButton">
+                                Next Lesson <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-info">
+                        <h3>About This Lesson</h3>
+                        <p id="videoDescription">This introductory lesson explains the fundamentals of Open Source Intelligence (OSINT), its applications, and the ethical considerations when gathering public information.</p>
+                    </div>
+
+                    <!-- Download Section - Only shows for lesson 15 -->
+                    <div class="download-section" id="downloadSection" style="display: none;">
+                        <h3>Course Challenge Materials</h3>
+                        <p>Download the OSINT Course Challenges PDF to test your skills with practical exercises and real-world scenarios.</p>
+                        <a href="OSINT_Course_Challenges.pdf" class="download-button" download>
+                            <i class="fas fa-file-download"></i>
+                            Download Challenge PDF
+                        </a>
+                    </div>
+
+                    <!-- OSINT Tools Section -->
+                    <div class="tools-section">
+                        <h3>ESSENTIAL OSINT TOOLS</h3>
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <i class="fas fa-search"></i>
+                                <h4>Google Dorks</h4>
+                                <p>Advanced search operators</p>
+                            </div>
+                            <div class="tool-card">
+                                <i class="fas fa-camera"></i>
+                                <h4>Reverse Image Search</h4>
+                                <p>Google Images, TinEye</p>
+                            </div>
+                            <div class="tool-card">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h4>Geolocation</h4>
+                                <p>Google Earth, SunCalc</p>
+                            </div>
+                            <div class="tool-card">
+                                <i class="fas fa-user-secret"></i>
+                                <h4>Username Search</h4>
+                                <p>Sherlock, Maigret</p>
+                            </div>
+                            <div class="tool-card">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email Investigation</h4>
+                                <p>Hunter, Email Format</p>
+                            </div>
+                            <div class="tool-card">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Breach Data</h4>
+                                <p>Have I Been Pwned</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="completionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Lesson Completed!</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <p>Congratulations! You've completed <span id="completedLessonName">Introduction: What is OSINT?</span>. Ready to move on to the next lesson?</p>
+            <div class="video-controls" style="margin-top: 1.5rem; border: none; padding: 0;">
+                <button class="nav-button" id="modalNextButton">
+                    Next Lesson <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <h4>Progress Saved</h4>
+            <p>Your progress has been updated successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        // Course data for OSINT - Updated with videoUrl property for each lesson
+        const courseModules = [
+            {
+                title: "Introduction: What is OSINT?",
+                description: "This introductory lesson explains the fundamentals of Open Source Intelligence (OSINT), its applications, and the ethical considerations when gathering public information.",
+                module: "Module 1: OSINT Fundamentals",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/1-Introduction+What+is+OSINT.mp4"
+            },
+            {
+                title: "Search Engine Operators",
+                description: "Master advanced Google search operators and techniques to find hidden information on the web.",
+                module: "Module 1: OSINT Fundamentals",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/2-Search+Engine+Operators.mp4"
+            },
+            {
+                title: "Reverse Image Searching",
+                description: "Learn to use reverse image search tools to find where else an image appears online and gather contextual information.",
+                module: "Module 1: OSINT Fundamentals",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/3-Reverse+Image+Searching.mp4"
+            },
+            {
+                title: "Viewing EXIF Data",
+                description: "Extract and analyze EXIF metadata from images to uncover camera details, locations, and timestamps.",
+                module: "Module 1: OSINT Fundamentals",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/4-Viewing+EXIF+Data.mp4"
+            },
+            {
+                title: "Finding Social Media Accounts",
+                description: "Techniques for discovering social media profiles across multiple platforms using usernames and other identifiers.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/5-Finding+Social+Media+Accounts.mp4"
+            },
+            {
+                title: "Finding Information on Facebook",
+                description: "Advanced Facebook investigation techniques to gather information from profiles, groups, and public posts.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/6-Finding+Information+on+Facebook.mp4"
+            },
+            {
+                title: "Finding Information on Instagram",
+                description: "Instagram OSINT methods including profile analysis, geolocation, and hashtag investigation.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/7-Finding+Information+on+Instagram.mp4"
+            },
+            {
+                title: "Finding Information on Twitter",
+                description: "Twitter investigation techniques including advanced search, account analysis, and tweet metadata.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/8-Finding+Information+on+Twitter.mp4"
+            },
+            {
+                title: "Finding Information on LinkedIn",
+                description: "Professional OSINT using LinkedIn to gather corporate intelligence and professional background information.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/9-Finding+Information+on+LinkedIn.mp4"
+            },
+            {
+                title: "Finding Information on Reddit",
+                description: "Reddit investigation techniques including user profiling, subreddit analysis, and comment history.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/10-Finding+Information+on+Reddit.mp4"
+            },
+            {
+                title: "Finding Information on TikTok",
+                description: "TikTok OSINT methods for analyzing videos, profiles, and trends to gather intelligence.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/11-Finding+Information+on+TikTok.mp4"
+            },
+            {
+                title: "Finding Information on YouTube",
+                description: "YouTube investigation techniques including channel analysis, video metadata, and comment investigation.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/12-Finding+Information+on+YouTube.mp4"
+            },
+            {
+                title: "Finding Information on Forums",
+                description: "Forum investigation methods to uncover user activity, discussions, and community interactions.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/13-Finding+Information+on+Forums.mp4"
+            },
+            {
+                title: "Finding Information on Dating Sites",
+                description: "Dating site OSINT techniques for profile analysis and information gathering from dating platforms.",
+                module: "Module 2: Social Media Intelligence",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/14-Finding+Information+on+Dating+Sites.mp4"
+            },
+            {
+                title: "Course Challenges",
+                description: "Test your OSINT skills with practical challenges that simulate real-world investigation scenarios.",
+                module: "Module 3: Practical Application",
+                completed: false,
+                videoUrl: "https://archive.org/embed/13-website-osint_20251015/15-Course+Challenges.mp4"
+            }
+        ];
+
+        // DOM Elements
+        const modulesList = document.getElementById('modulesList');
+        const currentVideoTitle = document.getElementById('currentVideoTitle');
+        const videoFrame = document.getElementById('videoFrame');
+        const videoDescription = document.getElementById('videoDescription');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const completeButton = document.getElementById('completeButton');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const completionModal = document.getElementById('completionModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalNextButton = document.getElementById('modalNextButton');
+        const completedLessonName = document.getElementById('completedLessonName');
+        const notification = document.getElementById('notification');
+        const progressButton = document.getElementById('progressButton');
+        const downloadSection = document.getElementById('downloadSection');
+
+        // Current lesson index
+        let currentLessonIndex = 0;
+
+        // Initialize the page
+        function init() {
+            renderModules();
+            loadLesson(currentLessonIndex);
+            updateProgress();
+            setupEventListeners();
+            initializeMatrix();
+        }
+
+        // Render modules in the sidebar
+        function renderModules() {
+            // Group lessons by module
+            const modules = {};
+            courseModules.forEach((lesson, index) => {
+                if (!modules[lesson.module]) {
+                    modules[lesson.module] = [];
+                }
+                modules[lesson.module].push({...lesson, index});
+            });
+
+            // Create HTML for each module
+            let modulesHTML = '';
+            for (const moduleName in modules) {
+                const lessons = modules[moduleName];
+                modulesHTML += `
+                    <div class="module-section">
+                        <div class="section-header" data-module="${moduleName}">
+                            <h4>${moduleName}</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <ul class="section-lessons">
+                            ${lessons.map(lesson => `
+                                <li class="module-item ${lesson.completed ? 'completed' : ''} ${lesson.index === currentLessonIndex ? 'active' : ''}" data-index="${lesson.index}">
+                                    <div class="module-number">${lesson.index + 1}</div>
+                                    <span>${lesson.title}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            modulesList.innerHTML = modulesHTML;
+
+            // Add event listeners to module headers for collapsing/expanding
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const lessonsList = header.nextElementSibling;
+                    header.classList.toggle('collapsed');
+                    lessonsList.classList.toggle('collapsed');
+                });
+            });
+
+            // Add event listeners to lesson items
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const index = parseInt(item.getAttribute('data-index'));
+                    loadLesson(index);
+                });
+            });
+        }
+
+        // Load a specific lesson
+        function loadLesson(index) {
+            // Update current lesson index
+            currentLessonIndex = index;
+            
+            // Get the lesson data
+            const lesson = courseModules[index];
+            
+            // Update video and content
+            currentVideoTitle.textContent = lesson.title;
+            videoDescription.textContent = lesson.description;
+            videoFrame.src = lesson.videoUrl;
+            
+            // Update active state in sidebar
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.classList.remove('active');
+                if (parseInt(item.getAttribute('data-index')) === index) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update button states
+            prevButton.disabled = index === 0;
+            nextButton.disabled = index === courseModules.length - 1;
+            
+            // Show/hide download section for lesson 15
+            if (index === 14) { // Course Challenges lesson
+                downloadSection.style.display = 'block';
+            } else {
+                downloadSection.style.display = 'none';
+            }
+            
+            // Update progress
+            updateProgress();
+        }
+
+        // Update progress bar and percentage
+        function updateProgress() {
+            const completedLessons = courseModules.filter(lesson => lesson.completed).length;
+            const totalLessons = courseModules.length;
+            const percentage = Math.round((completedLessons / totalLessons) * 100);
+            
+            progressFill.style.width = `${percentage}%`;
+            progressPercent.textContent = `${percentage}%`;
+        }
+
+        // Mark current lesson as completed
+        function completeCurrentLesson() {
+            courseModules[currentLessonIndex].completed = true;
+            
+            // Update the module item in sidebar
+            const currentModuleItem = document.querySelector(`.module-item[data-index="${currentLessonIndex}"]`);
+            if (currentModuleItem) {
+                currentModuleItem.classList.add('completed');
+            }
+            
+            // Update progress
+            updateProgress();
+            
+            // Show completion modal if not the last lesson
+            if (currentLessonIndex < courseModules.length - 1) {
+                completedLessonName.textContent = courseModules[currentLessonIndex].title;
+                completionModal.style.display = 'flex';
+            } else {
+                // If it's the last lesson, show a special notification
+                showNotification("Course Completed!", "Congratulations! You've finished the entire OSINT course.");
+            }
+        }
+
+        // Show notification
+        function showNotification(title, message) {
+            const notificationTitle = notification.querySelector('h4');
+            const notificationMessage = notification.querySelector('p');
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Navigation buttons
+            prevButton.addEventListener('click', () => {
+                if (currentLessonIndex > 0) {
+                    loadLesson(currentLessonIndex - 1);
+                }
+            });
+            
+            nextButton.addEventListener('click', () => {
+                if (currentLessonIndex < courseModules.length - 1) {
+                    loadLesson(currentLessonIndex + 1);
+                }
+            });
+            
+            // Complete button
+            completeButton.addEventListener('click', completeCurrentLesson);
+            
+            // Modal buttons
+            closeModal.addEventListener('click', () => {
+                completionModal.style.display = 'none';
+            });
+            
+            modalNextButton.addEventListener('click', () => {
+                completionModal.style.display = 'none';
+                if (currentLessonIndex < courseModules.length - 1) {
+                    loadLesson(currentLessonIndex + 1);
+                }
+            });
+            
+            // Progress button
+            progressButton.addEventListener('click', () => {
+                showNotification("Progress Overview", `You've completed ${courseModules.filter(lesson => lesson.completed).length} of ${courseModules.length} lessons.`);
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === completionModal) {
+                    completionModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Matrix animation
+        function initializeMatrix() {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Matrix characters
+            const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+            const charArray = chars.split("");
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            // Initialize drops
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+            }
+            
+            // Draw function
+            function draw() {
+                // Semi-transparent black background for trail effect
+                ctx.fillStyle = "rgba(5, 5, 8, 0.04)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = "#0ff0fc";
+                ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    // Reset drop if it reaches bottom or randomly
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    drops[i]++;
+                }
+            }
+            
+            // Animation loop
+            setInterval(draw, 33);
+            
+            // Resize handler
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

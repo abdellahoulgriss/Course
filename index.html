@@ -3,605 +3,2839 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDER ATTACK | System Compromised</title>
+    <title>CyberSec Academy | Master Hacking Skills</title>
+    <meta name="keywords" content="cybersecurity training, ethical hacking courses, penetration testing, online security courses, Linux for hackers, OSINT training, WiFi hacking, cybersecurity certification, hands-on hacking, cybersecurity academy, Morocco cybersecurity, eJPT certification, HTB CPTS, Abdellah Oulgriss, beginner to expert cybersecurity, practical hacking skills">
+    <meta name="description" content="Master cybersecurity through hands-on training. Join CyberSec Academy for Linux, OSINT, and WiFi hacking courses taught by certified professional Abdellah Oulgriss. eJPTv2 & HTB CPTS certified.">
+    <meta name="author" content="Abdellah Oulgriss">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="CyberSec Academy - Master Cybersecurity & Ethical Hacking">
+    <meta property="og:description" content="Hands-on cybersecurity training from beginner to expert. Linux, OSINT, and WiFi hacking courses by certified professional.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-green: #00ff41;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --text-color: #e0e0e0;
+            --dark-web-bg: #020208;
+            --dark-web-card: rgba(10, 5, 15, 0.9);
+            --dark-web-accent: #8b00ff;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            background-color: #000;
-            color: #ff0033;
-            font-family: 'Courier New', monospace;
-            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
             line-height: 1.6;
-        }
-
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
-                        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.05) 2px, rgba(0, 255, 0, 0.05) 4px);
-            z-index: -1;
-        }
-
-        .hackers-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .hacker {
-            position: absolute;
-            font-size: 24px;
-            color: #ff0033;
-            text-shadow: 0 0 10px #ff0033;
-            animation: float 15s linear infinite;
-        }
-
-        .dragon {
-            position: absolute;
-            font-size: 40px;
-            color: #ff0033;
-            text-shadow: 0 0 15px #ff0033;
-            animation: fly 25s linear infinite;
-        }
-
-        .parrot {
-            position: absolute;
-            font-size: 28px;
-            color: #ff0033;
-            text-shadow: 0 0 10px #ff0033;
-            animation: fly 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(-100px);
-            }
-            100% {
-                transform: translateY(-100px) translateX(100vw);
-            }
-        }
-
-        @keyframes fly {
-            0% {
-                transform: translateX(100vw) translateY(100px);
-            }
-            100% {
-                transform: translateX(-100px) translateY(-100vh);
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            padding: 20px 0;
-            border-bottom: 1px solid #ff0033;
-            text-align: center;
+            overflow-x: hidden;
             position: relative;
+            transition: background-color 0.5s ease;
+        }
+        
+        body.dark-web-mode {
+            background-color: var(--dark-web-bg);
+            --neon-blue: #8b00ff;
+            --neon-green: #ff00ff;
+            --card-bg: var(--dark-web-card);
+        }
+        
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             overflow: hidden;
         }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ff0033;
-            text-shadow: 0 0 10px #ff0033;
-            animation: glitch 5s infinite;
-            margin-bottom: 10px;
+        
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
         }
-
-        @keyframes glitch {
-            0% {
-                text-shadow: 2px 2px 0px #00ff00, -2px -2px 0px #0000ff;
-            }
-            20% {
-                text-shadow: -2px -2px 0px #00ff00, 2px 2px 0px #0000ff;
-            }
-            40% {
-                text-shadow: 2px -2px 0px #00ff00, -2px 2px 0px #0000ff;
-            }
-            60% {
-                text-shadow: -2px 2px 0px #00ff00, 2px -2px 0px #0000ff;
-            }
-            80% {
-                text-shadow: 2px 2px 0px #00ff00, -2px -2px 0px #0000ff;
-            }
-            100% {
-                text-shadow: -2px -2px 0px #00ff00, 2px 2px 0px #0000ff;
-            }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.7);
+            z-index: 1;
         }
-
-        .status-bar {
+        
+        /* Holographic Network Grid */
+        .network-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+        
+        .network-grid canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Cybernetic Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+            opacity: 0.7;
+        }
+        
+        /* Quantum Computing Visualization */
+        .quantum-viz {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .quantum-viz canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(5, 5, 8, 0.9);
+            border-bottom: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-web-mode header {
+            border-bottom-color: var(--dark-web-accent);
+            box-shadow: 0 0 15px rgba(139, 0, 255, 0.3);
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 0, 0, 0.1);
-            padding: 10px 20px;
-            border: 1px solid #ff0033;
-            margin-top: 10px;
+            padding: 20px 0;
         }
-
-        .status {
-            font-size: 1.2rem;
-            color: #ff0033;
-            text-shadow: 0 0 5px #ff0033;
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        .warning {
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+        
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-green);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+        
+        /* Dark Web Mode Toggle */
+        .dark-web-toggle {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(5, 5, 8, 0.8);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-web-toggle:hover {
+            background-color: rgba(0, 240, 252, 0.1);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        body.dark-web-mode .toggle-switch {
+            background-color: rgba(139, 0, 255, 0.3);
+        }
+        
+        body.dark-web-mode .toggle-slider {
+            transform: translateX(25px);
+            background-color: var(--dark-web-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            padding: 5rem 0;
             text-align: center;
-            padding: 50px 20px;
-            margin: 50px 0;
-            border: 2px solid #ff0033;
-            box-shadow: 0 0 20px #ff0033;
             position: relative;
             overflow: hidden;
         }
-
-        .warning::before {
-            content: "";
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        .hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 240, 252, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #b0b0b0;
+        }
+        
+        .typing-text {
+            border-right: 2px solid var(--neon-green);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink 1s step-end infinite;
+        }
+        
+        /* 3D Hacking Terminal */
+        .terminal-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 3rem auto;
+            perspective: 1000px;
+        }
+        
+        .terminal {
+            background: rgba(5, 5, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(255, 0, 0, 0.1) 2px,
-                rgba(255, 0, 0, 0.1) 4px
-            );
-            animation: scan 3s linear infinite;
+            background: linear-gradient(135deg, transparent 40%, rgba(0, 240, 252, 0.1) 50%, transparent 60%);
+            transform: translateX(-100%);
+            animation: terminalScan 3s infinite;
         }
-
-        @keyframes scan {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100%);
-            }
-        }
-
-        .warning h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #ff0033;
-            text-shadow: 0 0 15px #ff0033;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 0.7;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.7;
-            }
-        }
-
-        .warning p {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .terminal {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #ff0033;
-            box-shadow: 0 0 15px #ff0033;
-            margin: 30px auto;
-            max-width: 800px;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
+        
         .terminal-header {
-            background: #ff0033;
-            padding: 10px;
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
         }
-
+        
+        .terminal-title {
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+        
         .terminal-buttons {
             display: flex;
             gap: 8px;
         }
-
-        .terminal-btn {
+        
+        .terminal-button {
             width: 12px;
             height: 12px;
             border-radius: 50%;
         }
-
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27ca3f; }
-
-        .terminal-title {
-            margin-left: 10px;
-            color: #000;
-            font-weight: bold;
+        
+        .terminal-button.close {
+            background-color: #ff5f56;
         }
-
+        
+        .terminal-button.minimize {
+            background-color: #ffbd2e;
+        }
+        
+        .terminal-button.maximize {
+            background-color: #27c93f;
+        }
+        
         .terminal-body {
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            color: #00ff00;
-            height: 300px;
+            height: 200px;
             overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.5;
         }
-
+        
         .terminal-line {
-            margin-bottom: 10px;
-            animation: type 0.1s steps(40, end);
-            white-space: nowrap;
+            margin-bottom: 5px;
+        }
+        
+        .terminal-prompt {
+            color: var(--neon-green);
+        }
+        
+        .terminal-command {
+            color: var(--text-color);
+        }
+        
+        .terminal-output {
+            color: var(--neon-blue);
+        }
+        
+        .terminal-input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .terminal-prompt-input {
+            color: var(--neon-green);
+            margin-right: 5px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            outline: none;
+            flex: 1;
+        }
+        
+        /* Code Matrix Rain */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .matrix-rain canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Skill Tree Visualization */
+        .skill-tree {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 250px;
+            background: rgba(5, 5, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tree.minimized {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .skill-tree-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .skill-tree-title {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+        }
+        
+        .skill-tree-toggle {
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .skill-tree-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 240, 252, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            color: var(--neon-blue);
+        }
+        
+        .skill-icon.unlocked {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .skill-name {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .skill-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 5px;
             overflow: hidden;
         }
-
-        @keyframes type {
-            from { width: 0; }
-            to { width: 100%; }
+        
+        .skill-progress-bar {
+            height: 100%;
+            background: var(--neon-green);
+            width: 0;
+            transition: width 1s ease;
         }
-
-        .blink {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .attack-animation {
+        
+        /* Achievement Badges */
+        .achievement-container {
             position: fixed;
-            pointer-events: none;
+            top: 100px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             z-index: 100;
         }
-
-        .firewall {
+        
+        .achievement {
+            width: 60px;
+            height: 60px;
+            background: rgba(5, 5, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            padding: 30px;
-            margin: 50px 0;
-            border: 2px solid #ff0033;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease;
+        }
+        
+        .achievement.unlocked {
+            opacity: 1;
+            transform: scale(1);
+            animation: achievementPulse 2s infinite;
+        }
+        
+        .achievement i {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+        }
+        
+        .achievement-tooltip {
+            position: absolute;
+            left: 70px;
+            background: rgba(5, 5, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 5px;
+            padding: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .achievement:hover .achievement-tooltip {
+            opacity: 1;
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
             text-align: center;
-            background: rgba(255, 0, 0, 0.05);
+            margin-bottom: 4rem;
         }
-
-        .firewall h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+        
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
         }
-
-        .progress-container {
-            width: 100%;
-            height: 30px;
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff0033;
-            margin: 20px 0;
+        
+        .section-title p {
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+        
+        .courses-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+        
+        .course-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            min-height: 500px;
         }
-
-        .progress-bar {
+        
+        .course-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            width: 0%;
-            background: #ff0033;
-            animation: progress 10s linear infinite;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 252, 0.1), transparent);
+            transition: left 0.7s;
         }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
+        
+        .course-card:hover::before {
+            left: 100%;
         }
-
-        .counter {
-            font-size: 2rem;
-            margin: 20px 0;
-            color: #ff0033;
-            text-shadow: 0 0 10px #ff0033;
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 240, 252, 0.25);
+            border-color: var(--neon-blue);
         }
-
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #ff0033;
-            margin-top: 50px;
-        }
-
-        .social-links {
+        
+        .course-logo-container {
+            position: relative;
+            flex: 1;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            align-items: center;
+            min-height: 400px;
         }
-
+        
+        .course-logo {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 252, 0.4));
+            border: 2px solid rgba(0, 240, 252, 0.3);
+            padding: 15px;
+            background: rgba(5, 5, 15, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .course-card:hover .course-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(0, 240, 252, 0.8));
+            border-color: var(--neon-blue);
+        }
+        
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            border-radius: 20px;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+        
+        .course-card:hover .logo-glow {
+            opacity: 1;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        
+        .logo-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green), var(--neon-blue)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .course-card:hover .logo-border {
+            opacity: 1;
+        }
+        
+        .course-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .course-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+        }
+        
+        .course-subtitle {
+            font-size: 1.3rem;
+            color: var(--neon-green);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+        }
+        
+        .course-card p {
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .course-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        
+        .course-features li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .course-features li:hover {
+            color: var(--neon-blue);
+            transform: translateX(5px);
+        }
+        
+        .course-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .course-features li:hover::before {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .course-button {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 1rem 2.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            width: auto;
+            align-self: flex-start;
+        }
+        
+        .course-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 252, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .course-button:hover::before {
+            left: 100%;
+        }
+        
+        .course-button:hover {
+            background-color: rgba(0, 240, 252, 0.1);
+            box-shadow: 0 0 20px var(--neon-blue);
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            transform: translateY(-3px);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: rgba(5, 5, 8, 0.8);
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--neon-green), transparent);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            background: linear-gradient(45deg, var(--dark-bg), var(--darker-bg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .avatar-image {
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.1);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.5);
+        }
+        
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 240, 252, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        /* Biometric Scanner */
+        .biometric-scanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .avatar:hover .biometric-scanner {
+            opacity: 1;
+        }
+        
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--neon-green), transparent);
+            animation: scan 2s linear infinite;
+        }
+        
+        .scanner-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--neon-green) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neon-green) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        
+        .about-text {
+            flex: 2;
+        }
+        
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #b0b0b0;
+        }
+        
+        /* CERTIFICATIONS SECTION */
+        .certifications-section {
+            margin-top: 3rem;
+        }
+        
+        .certifications-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--neon-blue);
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+        }
+        
+        .certifications {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .cert-badge {
+            background: linear-gradient(145deg, var(--darker-bg), var(--card-bg));
+            border: 2px solid rgba(0, 240, 252, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            width: 320px;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .cert-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 252, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .cert-badge:hover::before {
+            left: 100%;
+        }
+        
+        .cert-badge:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 252, 0.25);
+            border-color: var(--neon-blue);
+        }
+        
+        .cert-image-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cert-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: all 0.4s;
+            filter: drop-shadow(0 0 8px rgba(0, 240, 252, 0.3));
+            border: 2px solid rgba(0, 240, 252, 0.2);
+            background: rgba(5, 5, 15, 0.6);
+            padding: 10px;
+        }
+        
+        .cert-badge:hover .cert-image {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(0, 240, 252, 0.6));
+            border-color: var(--neon-blue);
+        }
+        
+        .cert-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            border-radius: 15px;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+        }
+        
+        .cert-badge:hover .cert-glow {
+            opacity: 1;
+            animation: certPulse 2s infinite alternate;
+        }
+        
+        .cert-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green), var(--neon-blue)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .cert-badge:hover .cert-border {
+            opacity: 1;
+        }
+        
+        .cert-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .cert-badge h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px rgba(0, 240, 252, 0.5);
+        }
+        
+        .cert-badge p {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cert-description {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Blockchain Verification Animation */
+        .blockchain-verification {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .cert-badge:hover .blockchain-verification {
+            opacity: 1;
+        }
+        
+        .blockchain-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            border-radius: 50%;
+            color: var(--neon-green);
+            animation: blockchainPulse 2s infinite;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(5, 5, 8, 0.9);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(0, 240, 252, 0.3);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
         .social-links a {
-            color: #ff0033;
+            color: var(--text-color);
             font-size: 1.5rem;
             transition: all 0.3s;
         }
-
+        
         .social-links a:hover {
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
         }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 1.8rem;
+        
+        .copyright {
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Neural Network Loading Animation */
+        .neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .neural-network.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .neural-network-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .neural-network-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .neural-network-container canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .neural-network-progress {
+            margin-top: 2rem;
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .neural-network-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            width: 0;
+            transition: width 0.3s ease;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes blink {
+            0%, 100% { border-color: var(--neon-green); }
+            50% { border-color: transparent; }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        @keyframes certPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes terminalScan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        @keyframes achievementPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
+        }
+        
+        @keyframes blockchainPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .course-card {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 2rem;
             }
             
-            .warning h1 {
+            .course-logo {
+                max-width: 500px;
+            }
+            
+            .course-button {
+                align-self: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .course-card {
+                padding: 2rem;
+            }
+            
+            .course-card h3 {
                 font-size: 2rem;
             }
             
-            .status {
-                font-size: 1rem;
+            .course-logo {
+                max-width: 100%;
             }
             
-            .terminal-body {
-                height: 200px;
+            .certifications {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cert-badge {
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .skill-tree {
+                display: none;
+            }
+            
+            .achievement-container {
+                display: none;
+            }
+            
+            .dark-web-toggle {
+                top: 80px;
+                right: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="matrix-bg"></div>
+    <!-- Neural Network Loading Animation -->
+    <div class="neural-network" id="neuralNetwork">
+        <div class="neural-network-title">INITIALIZING CYBERSEC ACADEMY</div>
+        <div class="neural-network-container">
+            <canvas id="neuralNetworkCanvas"></canvas>
+        </div>
+        <div class="neural-network-progress">
+            <div class="neural-network-progress-bar" id="neuralNetworkProgress"></div>
+        </div>
+    </div>
     
-    <!-- Hacking Elements -->
-    <div class="hackers-bg" id="hackersContainer"></div>
+   
+    <!-- Holographic Network Grid -->
+    <div class="network-grid">
+        <canvas id="networkGrid"></canvas>
+    </div>
+    
+    <!-- Cybernetic Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Quantum Computing Visualization -->
+    <div class="quantum-viz">
+        <canvas id="quantumViz"></canvas>
+    </div>
+    
+    <!-- Code Matrix Rain -->
+    <div class="matrix-rain">
+        <canvas id="matrixRain"></canvas>
+    </div>
     
     <!-- Header -->
-    <header class="header">
-        <div class="container">
+    <header>
+        <div class="container header-content">
             <div class="logo">
-                <span>SYSTEM COMPROMISED</span>
+                <i class="fas fa-terminal"></i>
+                <h1>CYBERSEC ACADEMY</h1>
             </div>
-            <div class="status-bar">
-                <div class="status">
-                    <i class="fas fa-shield-alt"></i> SECURITY BREACH DETECTED
+            <nav>
+                <ul>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button" id="enrollButton">Enroll Now</button>
+        </div>
+    </header>
+    
+    <!-- Dark Web Mode Toggle -->
+    <div class="dark-web-toggle" id="darkWebToggle">
+        <span>Dark Web</span>
+        <div class="toggle-switch">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- Skill Tree Visualization -->
+    <div class="skill-tree" id="skillTree">
+        <div class="skill-tree-header">
+            <div class="skill-tree-title">SKILLS</div>
+            <button class="skill-tree-toggle" id="skillTreeToggle">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="skill-tree-content">
+            <div class="skill-item">
+                <div class="skill-icon unlocked">
+                    <i class="fas fa-terminal"></i>
                 </div>
-                <div class="status">
-                    <i class="fas fa-exclamation-triangle"></i> UNDER ATTACK
+                <div>
+                    <div class="skill-name">Linux Fundamentals</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-progress="100"></div>
+                    </div>
                 </div>
-                <div class="status">
-                    <i class="fas fa-skull-crossbones"></i> CRITICAL THREAT LEVEL
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon unlocked">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <div>
+                    <div class="skill-name">Web Hacking</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-progress="65"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div>
+                    <div class="skill-name">Network Hacking</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-progress="70"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <div>
+                    <div class="skill-name">OSINT & OPSEC</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-progress="90"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Warning Section -->
-    <section class="warning">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h1>WEBSITE UNDER CONSTRUCTION</h1>
-            <p>Our systems have been compromised by multiple threat actors.</p>
-            <p>Advanced persistent threats and botnets are actively targeting our infrastructure.</p>
-            <p>Security team is working to restore services and implement countermeasures.</p>
-            <p>Estimated time to restoration: UNKNOWN</p>
+            <h2>MASTER THE ART OF CYBERSECURITY</h2>
+            <p>Join our elite training programs and transform from beginner to security expert through hands-on, real-world hacking scenarios.</p>
+            <div class="typing-text" id="typingText"></div>
             
-            <div class="counter">
-                <i class="fas fa-biohazard"></i> ATTACKS IN PROGRESS: <span id="attackCount">0</span>
+            <!-- 3D Hacking Terminal -->
+            <div class="terminal-container">
+                <div class="terminal" id="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-title">CYBERSEC TERMINAL v2.0</div>
+                        <div class="terminal-buttons">
+                            <div class="terminal-button close"></div>
+                            <div class="terminal-button minimize"></div>
+                            <div class="terminal-button maximize"></div>
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">root@cybersec:~$</span>
+                            <span class="terminal-command"> Initializing secure connection...</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">✓ Connection established with quantum encryption</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">root@cybersec:~$</span>
+                            <span class="terminal-command"> Scanning for vulnerabilities...</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-output">✓ 3 potential exploits identified</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">root@cybersec:~$</span>
+                            <span class="terminal-output">Ready for your commands. Type 'help' for available options.</span>
+                        </div>
+                    </div>
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt-input">root@cybersec:~$</span>
+                        <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command...">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Terminal Simulation -->
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <span class="terminal-btn red"></span>
-                <span class="terminal-btn yellow"></span>
-                <span class="terminal-btn green"></span>
-            </div>
-            <span class="terminal-title">root@hacker-network:~</span>
-        </div>
-        <div class="terminal-body" id="terminalOutput">
-            <!-- Terminal output will be generated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Firewall Section -->
-    <div class="firewall">
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
         <div class="container">
-            <h2>FIREWALL DEFENSE SYSTEMS ACTIVATED</h2>
-            <p>Countermeasures deployed against incoming threats</p>
-            <div class="progress-container">
-                <div class="progress-bar"></div>
+            <div class="section-title">
+                <h2>SPECIALIZED COURSES</h2>
+                <p>Hands-on training designed by security professionals for aspiring ethical hackers</p>
             </div>
-            <p>Neural network AI analyzing attack patterns</p>
+            <div class="courses-grid">
+                <!-- Linux Mastery Course -->
+                <div class="course-card">
+                    <div class="course-logo-container">
+                        <img src="Images/Linux-Course-Logo.png" alt="Linux Mastery Course" class="course-logo">
+                        <div class="logo-glow"></div>
+                        <div class="logo-border"></div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Linux Mastery</h3>
+                        <div class="course-subtitle">From Beginner to PRO Hacker</div>
+                        <p>Master the operating system that powers the cybersecurity world. From basic commands to advanced system administration, this course takes you from absolute beginner to Linux expert capable of managing complex systems and performing advanced security tasks.</p>
+                        <ul class="course-features">
+                            <li>Command line proficiency and advanced scripting</li>
+                            <li>User, group and permission management</li>
+                            <li>Networking and service configuration</li>
+                            <li>System hardening and security techniques</li>
+                            <li>Process management and automation</li>
+                            <li>Package management and software installation</li>
+                        </ul>
+                        <a href="Linux-Mastery.html" class="course-button">Explore Course</a>
+                    </div>
+                </div>
+                
+                <!-- OSINT Course -->
+                <div class="course-card">
+                    <div class="course-logo-container">
+                        <img src="Images/Osint-Course-Logo.png" alt="OSINT Course" class="course-logo">
+                        <div class="logo-glow"></div>
+                        <div class="logo-border"></div>
+                    </div>
+                    <div class="course-content">
+                        <h3>OSINT Mastery</h3>
+                        <div class="course-subtitle">Find ANYTHING Online</div>
+                        <p>Learn to find information that doesn't want to be found. The art of gathering intelligence from public sources has never been more critical. Master advanced techniques used by intelligence agencies and security professionals worldwide.</p>
+                        <ul class="course-features">
+                            <li>Social media investigation and profiling</li>
+                            <li>Domain, IP and infrastructure reconnaissance</li>
+                            <li>Metadata extraction and analysis</li>
+                            <li>Corporate and personal intelligence gathering</li>
+                        </ul>
+                        <a href="OSINT.html" class="course-button">Explore Course</a>
+                    </div>
+                </div>
+                
+                <!-- Wi-Fi Hacking Course -->
+                <div class="course-card">
+                    <div class="course-logo-container">
+                        <img src="Images/Wifi-Course-Logo.png" alt="Wi-Fi Hacking Course" class="course-logo">
+                        <div class="logo-glow"></div>
+                        <div class="logo-border"></div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Wi-Fi Hacking</h3>
+                        <div class="course-subtitle">Attack & Defense Masterclass</div>
+                        <p>Understand wireless networks from both attack and defense perspectives. This comprehensive course covers everything from basic wireless concepts to advanced exploitation techniques and enterprise-level security implementations.</p>
+                        <ul class="course-features">
+                            <li>Wireless network fundamentals and protocols</li>
+                            <li>WEP, WPA, WPA2 encryption cracking</li>
+                            <li>Advanced packet analysis and sniffing techniques</li>
+                            <li>Enterprise network security and penetration testing</li>
+                        </ul>
+                        <a href="Wifi-Hacking.html" class="course-button">Explore Course</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="avatar">
+                        <img src="logo.png" alt="CyberSec Academy Logo" class="avatar-image">
+                        <!-- Biometric Scanner -->
+                        <div class="biometric-scanner">
+                            <div class="scanner-line"></div>
+                            <div class="scanner-grid"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>ABOUT ABDELLAH OULGRISS</h2>
+                    <p>Passionate and certified Cybersecurity enthusiast with hands-on experience in penetration testing, vulnerability assessment, and network defense. eJPTv2 Certified and HTB CPTS Certified, demonstrating practical skills in offensive and defensive security.</p>
+                    <p>Based in Morocco, I've worked as a Freelancer Pentester for many individuals to strengthen their websites and business security posture while training the next generation of cybersecurity professionals through practical, hands-on courses.</p>
+                    <p>My teaching philosophy centers on real-world application - you'll learn by doing, not just watching. Each course is designed to build your skills progressively, from fundamentals to advanced techniques used by security professionals.</p>
+                    
+                    <!-- CERTIFICATIONS SECTION -->
+                    <div class="certifications-section">
+                        <h3 class="certifications-title">PROFESSIONAL CERTIFICATIONS</h3>
+                        <div class="certifications">
+                            <div class="cert-badge">
+                                <div class="cert-image-container">
+                                    <img src="Images/ejpt.png" alt="eJPTv2 Certification" class="cert-image">
+                                    <div class="cert-glow"></div>
+                                    <div class="cert-border"></div>
+                                </div>
+                                <div class="cert-info">
+                                    <h4>eJPTv2</h4>
+                                    <p>eLearnSecurity Junior Penetration Tester</p>
+                                    <div class="cert-description">
+                                        Certified Professional in penetration testing methodologies and tools
+                                    </div>
+                                </div>
+                                <!-- Blockchain Verification Animation -->
+                                <div class="blockchain-verification">
+                                    <div class="blockchain-icon">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cert-badge">
+                                <div class="cert-image-container">
+                                    <img src="Images/CPTS.png" alt="HTB CPTS Certification" class="cert-image">
+                                    <div class="cert-glow"></div>
+                                    <div class="cert-border"></div>
+                                </div>
+                                <div class="cert-info">
+                                    <h4>HTB CPTS</h4>
+                                    <p>HackTheBox Certified Penetration Testing Specialist</p>
+                                    <div class="cert-description">
+                                        Advanced penetration testing and offensive security certification
+                                    </div>
+                                </div>
+                                <!-- Blockchain Verification Animation -->
+                                <div class="blockchain-verification">
+                                    <div class="blockchain-icon">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer id="contact">
         <div class="container">
-            <p>ETHICAL HACKING COURSE BY ABDELLAH OULGRISS</p>
-            <p>Systems temporarily offline due to security incident</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-terminal"></i>
+                    <h1>CYBERSEC ACADEMY</h1>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/abdellahoulg/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/abdellahoulgriss"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/channel/UCHcTpCXET5exB0JaEsnbuWg"><i class="fab fa-youtube"></i></a>
+                    <a href="mailto:oulgrissabdellah@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+212696960392"><i class="fas fa-phone"></i></a>
+                </div>
             </div>
-            <p>&copy; 2025-2026 ABDELLAH OULGRISS. SYSTEMS COMPROMISED.</p>
+            <div class="copyright">
+                <p>&copy; 2025-2026 CyberSec Academy. All rights reserved. | Created by Abdellah Oulgriss</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Create floating hacking elements
-        const hackersContainer = document.getElementById('hackersContainer');
-        const hackerIcons = ['<i class="fas fa-user-secret"></i>', '<i class="fas fa-robot"></i>', '<i class="fas fa-skull"></i>'];
-        const dragonIcons = ['<i class="fas fa-dragon"></i>'];
-        const parrotIcons = ['<i class="fas fa-kiwi-bird"></i>'];
+        // Neural Network Loading Animation
+        const neuralNetwork = document.getElementById('neuralNetwork');
+        const neuralNetworkCanvas = document.getElementById('neuralNetworkCanvas');
+        const neuralNetworkProgress = document.getElementById('neuralNetworkProgress');
+        const ctx = neuralNetworkCanvas.getContext('2d');
         
-        function createHackingElement(icon, className) {
-            const element = document.createElement('div');
-            element.className = className;
-            element.innerHTML = icon;
-            element.style.left = Math.random() * 100 + 'vw';
-            element.style.animationDuration = (15 + Math.random() * 20) + 's';
-            element.style.animationDelay = Math.random() * 5 + 's';
-            hackersContainer.appendChild(element);
-            
-            // Remove element after animation completes to prevent DOM overload
-            setTimeout(() => {
-                element.remove();
-            }, 30000);
+        // Set canvas size
+        neuralNetworkCanvas.width = 300;
+        neuralNetworkCanvas.height = 300;
+        
+        // Neural network nodes
+        const nodes = [];
+        const nodeCount = 20;
+        
+        // Create nodes
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * neuralNetworkCanvas.width,
+                y: Math.random() * neuralNetworkCanvas.height,
+                radius: Math.random() * 3 + 2,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                connections: []
+            });
         }
         
-        // Create initial elements
-        for (let i = 0; i < 15; i++) {
-            createHackingElement(hackerIcons[Math.floor(Math.random() * hackerIcons.length)], 'hacker');
-        }
-        
-        for (let i = 0; i < 3; i++) {
-            createHackingElement(dragonIcons[0], 'dragon');
-        }
-        
-        for (let i = 0; i < 5; i++) {
-            createHackingElement(parrotIcons[0], 'parrot');
-        }
-        
-        // Continuously add new elements
-        setInterval(() => {
-            createHackingElement(hackerIcons[Math.floor(Math.random() * hackerIcons.length)], 'hacker');
-        }, 2000);
-        
-        setInterval(() => {
-            createHackingElement(dragonIcons[0], 'dragon');
-        }, 8000);
-        
-        setInterval(() => {
-            createHackingElement(parrotIcons[0], 'parrot');
-        }, 5000);
-        
-        // Terminal simulation
-        const terminalOutput = document.getElementById('terminalOutput');
-        const terminalLines = [
-            "> Initializing attack sequence...",
-            "> Scanning for vulnerabilities...",
-            "> Firewall bypass in progress...",
-            "> Exploiting CVE-2024-XXXX...",
-            "> Gaining root access...",
-            "> Deploying payload...",
-            "> Establishing persistence...",
-            "> Covering tracks...",
-            "> Connection established to command & control server...",
-            "> Downloading additional malware...",
-            "> Brute force attack initiated...",
-            "> SQL injection vectors identified...",
-            "> XSS payloads deployed...",
-            "> DDoS amplification in progress...",
-            "> Data exfiltration initiated...",
-            "> Encryption ransomware deployed...",
-            "> Backdoor installed...",
-            "> Privilege escalation successful...",
-            "> Lateral movement detected...",
-            "> SYSTEM COMPROMISED"
-        ];
-        
-        let lineIndex = 0;
-        
-        function addTerminalLine() {
-            if (lineIndex < terminalLines.length) {
-                const line = document.createElement('div');
-                line.className = 'terminal-line';
-                line.textContent = terminalLines[lineIndex];
-                terminalOutput.appendChild(line);
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                lineIndex++;
-                
-                // Random delay between lines
-                setTimeout(addTerminalLine, 200 + Math.random() * 800);
-            } else {
-                // Add blinking cursor at the end
-                const cursor = document.createElement('div');
-                cursor.className = 'terminal-line blink';
-                cursor.textContent = "_";
-                terminalOutput.appendChild(cursor);
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                
-                // Restart terminal after a delay
-                setTimeout(() => {
-                    terminalOutput.innerHTML = '';
-                    lineIndex = 0;
-                    addTerminalLine();
-                }, 10000);
+        // Create connections
+        for (let i = 0; i < nodeCount; i++) {
+            const connectionCount = Math.floor(Math.random() * 3) + 1;
+            for (let j = 0; j < connectionCount; j++) {
+                const targetIndex = Math.floor(Math.random() * nodeCount);
+                if (targetIndex !== i) {
+                    nodes[i].connections.push(targetIndex);
+                }
             }
         }
         
-        // Start terminal simulation
-        addTerminalLine();
+        // Animation progress
+        let progress = 0;
         
-        // Attack counter
-        const attackCountElement = document.getElementById('attackCount');
-        let attackCount = 0;
-        
-        setInterval(() => {
-            attackCount += Math.floor(Math.random() * 5) + 1;
-            attackCountElement.textContent = attackCount;
-        }, 1000);
-        
-        // Create random attack animations
-        function createAttackAnimation() {
-            const attack = document.createElement('div');
-            attack.className = 'attack-animation';
-            attack.innerHTML = '<i class="fas fa-bolt"></i>';
-            attack.style.left = Math.random() * 100 + 'vw';
-            attack.style.top = Math.random() * 100 + 'vh';
-            attack.style.fontSize = (20 + Math.random() * 30) + 'px';
-            attack.style.color = '#ff0033';
-            attack.style.textShadow = '0 0 10px #ff0033';
-            document.body.appendChild(attack);
+        // Draw neural network
+        function drawNeuralNetwork() {
+            ctx.clearRect(0, 0, neuralNetworkCanvas.width, neuralNetworkCanvas.height);
             
-            // Animate the attack
-            attack.animate([
-                { opacity: 0, transform: 'scale(0.5)' },
-                { opacity: 1, transform: 'scale(1.5)' },
-                { opacity: 0, transform: 'scale(0.5)' }
-            ], {
-                duration: 1000 + Math.random() * 2000,
-                easing: 'ease-out'
-            });
+            // Draw connections
+            ctx.strokeStyle = 'rgba(0, 240, 252, 0.2)';
+            ctx.lineWidth = 1;
             
-            // Remove after animation
-            setTimeout(() => {
-                attack.remove();
-            }, 3000);
+            for (let i = 0; i < nodeCount; i++) {
+                for (let j = 0; j < nodes[i].connections.length; j++) {
+                    const targetIndex = nodes[i].connections[j];
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[targetIndex].x, nodes[targetIndex].y);
+                    ctx.stroke();
+                }
+            }
+            
+            // Draw nodes
+            for (let i = 0; i < nodeCount; i++) {
+                ctx.fillStyle = 'rgba(0, 255, 65, 0.8)';
+                ctx.beginPath();
+                ctx.arc(nodes[i].x, nodes[i].y, nodes[i].radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Update position
+                nodes[i].x += nodes[i].vx;
+                nodes[i].y += nodes[i].vy;
+                
+                // Bounce off walls
+                if (nodes[i].x < 0 || nodes[i].x > neuralNetworkCanvas.width) {
+                    nodes[i].vx = -nodes[i].vx;
+                }
+                if (nodes[i].y < 0 || nodes[i].y > neuralNetworkCanvas.height) {
+                    nodes[i].vy = -nodes[i].vy;
+                }
+            }
+            
+            // Update progress
+            progress += 2;
+            neuralNetworkProgress.style.width = progress + '%';
+            
+            // Hide neural network when complete
+            if (progress >= 100) {
+                setTimeout(() => {
+                    neuralNetwork.classList.add('hidden');
+                }, 500);
+            } else {
+                requestAnimationFrame(drawNeuralNetwork);
+            }
         }
         
-        // Create attack animations periodically
-        setInterval(createAttackAnimation, 500);
+        // Start neural network animation
+        drawNeuralNetwork();
+        
+        // Holographic Network Grid
+        const networkGrid = document.getElementById('networkGrid');
+        const networkGridCanvas = document.getElementById('networkGrid');
+        const networkCtx = networkGridCanvas.getContext('2d');
+        
+        // Set canvas size
+        function resizeNetworkGrid() {
+            networkGridCanvas.width = window.innerWidth;
+            networkGridCanvas.height = window.innerHeight;
+        }
+        
+        resizeNetworkGrid();
+        window.addEventListener('resize', resizeNetworkGrid);
+        
+        // Network grid points
+        const gridSize = 50;
+        const points = [];
+        
+        // Create grid points
+        for (let x = 0; x < networkGridCanvas.width; x += gridSize) {
+            for (let y = 0; y < networkGridCanvas.height; y += gridSize) {
+                points.push({
+                    x: x,
+                    y: y,
+                    originalX: x,
+                    originalY: y,
+                    vx: 0,
+                    vy: 0
+                });
+            }
+        }
+        
+        // Mouse position
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        // Track mouse movement
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        // Draw network grid
+        function drawNetworkGrid() {
+            networkCtx.clearRect(0, 0, networkGridCanvas.width, networkGridCanvas.height);
+            
+            // Update points based on mouse position
+            for (let i = 0; i < points.length; i++) {
+                const point = points[i];
+                const dx = mouseX - point.x;
+                const dy = mouseY - point.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    point.vx -= (dx / distance) * force * 2;
+                    point.vy -= (dy / distance) * force * 2;
+                }
+                
+                // Apply velocity
+                point.x += point.vx;
+                point.y += point.vy;
+                
+                // Damping
+                point.vx *= 0.95;
+                point.vy *= 0.95;
+                
+                // Return to original position
+                point.x += (point.originalX - point.x) * 0.05;
+                point.y += (point.originalY - point.y) * 0.05;
+            }
+            
+            // Draw connections
+            networkCtx.strokeStyle = 'rgba(0, 240, 252, 0.2)';
+            networkCtx.lineWidth = 1;
+            
+            for (let i = 0; i < points.length; i++) {
+                for (let j = i + 1; j < points.length; j++) {
+                    const dx = points[i].x - points[j].x;
+                    const dy = points[i].y - points[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < gridSize * 1.5) {
+                        networkCtx.beginPath();
+                        networkCtx.moveTo(points[i].x, points[i].y);
+                        networkCtx.lineTo(points[j].x, points[j].y);
+                        networkCtx.stroke();
+                    }
+                }
+            }
+            
+            // Draw points
+            networkCtx.fillStyle = 'rgba(0, 240, 252, 0.5)';
+            
+            for (let i = 0; i < points.length; i++) {
+                networkCtx.beginPath();
+                networkCtx.arc(points[i].x, points[i].y, 2, 0, Math.PI * 2);
+                networkCtx.fill();
+            }
+            
+            requestAnimationFrame(drawNetworkGrid);
+        }
+        
+        // Start network grid animation
+        drawNetworkGrid();
+        
+        // Cybernetic Particles
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particles = [];
+        const particleCount = 50;
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 3 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight;
+            
+            particle.style.left = posX + 'px';
+            particle.style.top = posY + 'px';
+            
+            particlesContainer.appendChild(particle);
+            
+            particles.push({
+                element: particle,
+                x: posX,
+                y: posY,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: size
+            });
+        }
+        
+        // Animate particles
+        function animateParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                const particle = particles[i];
+                
+                // Update position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                
+                // Bounce off walls
+                if (particle.x < 0 || particle.x > window.innerWidth) {
+                    particle.vx = -particle.vx;
+                }
+                if (particle.y < 0 || particle.y > window.innerHeight) {
+                    particle.vy = -particle.vy;
+                }
+                
+                // Apply position
+                particle.element.style.left = particle.x + 'px';
+                particle.element.style.top = particle.y + 'px';
+                
+                // Connect nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const other = particles[j];
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        const opacity = (100 - distance) / 100;
+                        
+                        // Create connection line
+                        const line = document.createElement('div');
+                        line.style.position = 'absolute';
+                        line.style.backgroundColor = 'rgba(0, 240, 252, ' + (opacity * 0.2) + ')';
+                        line.style.height = '1px';
+                        line.style.transformOrigin = 'left center';
+                        
+                        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                        line.style.width = distance + 'px';
+                        line.style.left = particle.x + 'px';
+                        line.style.top = particle.y + 'px';
+                        line.style.transform = 'rotate(' + angle + 'deg)';
+                        
+                        particlesContainer.appendChild(line);
+                        
+                        // Remove line after animation
+                        setTimeout(() => {
+                            if (line.parentNode) {
+                                line.parentNode.removeChild(line);
+                            }
+                        }, 100);
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        // Start particle animation
+        animateParticles();
+        
+        // Quantum Computing Visualization
+        const quantumViz = document.getElementById('quantumViz');
+        const quantumCanvas = document.getElementById('quantumViz');
+        const quantumCtx = quantumCanvas.getContext('2d');
+        
+        // Set canvas size
+        function resizeQuantumViz() {
+            quantumCanvas.width = window.innerWidth;
+            quantumCanvas.height = window.innerHeight;
+        }
+        
+        resizeQuantumViz();
+        window.addEventListener('resize', resizeQuantumViz);
+        
+        // Quantum particles
+        const quantumParticles = [];
+        const quantumParticleCount = 30;
+        
+        // Create quantum particles
+        for (let i = 0; i < quantumParticleCount; i++) {
+            quantumParticles.push({
+                x: Math.random() * quantumCanvas.width,
+                y: Math.random() * quantumCanvas.height,
+                radius: Math.random() * 3 + 1,
+                angle: Math.random() * Math.PI * 2,
+                angleSpeed: (Math.random() - 0.5) * 0.02,
+                orbitRadius: Math.random() * 100 + 50,
+                orbitSpeed: (Math.random() - 0.5) * 0.01,
+                color: Math.random() > 0.5 ? '#0ff0fc' : '#00ff41'
+            });
+        }
+        
+        // Draw quantum visualization
+        function drawQuantumViz() {
+            quantumCtx.clearRect(0, 0, quantumCanvas.width, quantumCanvas.height);
+            
+            // Update and draw quantum particles
+            for (let i = 0; i < quantumParticles.length; i++) {
+                const particle = quantumParticles[i];
+                
+                // Update angle
+                particle.angle += particle.angleSpeed;
+                
+                // Calculate position
+                const centerX = quantumCanvas.width / 2;
+                const centerY = quantumCanvas.height / 2;
+                
+                particle.x = centerX + Math.cos(particle.angle) * particle.orbitRadius;
+                particle.y = centerY + Math.sin(particle.angle) * particle.orbitRadius;
+                
+                // Update orbit radius
+                particle.orbitRadius += Math.sin(particle.angle * 2) * particle.orbitSpeed;
+                
+                // Draw particle
+                quantumCtx.fillStyle = particle.color;
+                quantumCtx.beginPath();
+                quantumCtx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                quantumCtx.fill();
+                
+                // Draw connections to nearby particles
+                for (let j = i + 1; j < quantumParticles.length; j++) {
+                    const other = quantumParticles[j];
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        const gradient = quantumCtx.createLinearGradient(
+                            particle.x, particle.y, other.x, other.y
+                        );
+                        gradient.addColorStop(0, particle.color);
+                        gradient.addColorStop(1, other.color);
+                        
+                        quantumCtx.strokeStyle = gradient;
+                        quantumCtx.globalAlpha = (150 - distance) / 150 * 0.5;
+                        quantumCtx.lineWidth = 1;
+                        quantumCtx.beginPath();
+                        quantumCtx.moveTo(particle.x, particle.y);
+                        quantumCtx.lineTo(other.x, other.y);
+                        quantumCtx.stroke();
+                        quantumCtx.globalAlpha = 1;
+                    }
+                }
+            }
+            
+            requestAnimationFrame(drawQuantumViz);
+        }
+        
+        // Start quantum visualization
+        drawQuantumViz();
+        
+        // Code Matrix Rain
+        const matrixRain = document.getElementById('matrixRain');
+        const matrixCanvas = document.getElementById('matrixRain');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        
+        // Set canvas size
+        function resizeMatrixRain() {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        }
+        
+        resizeMatrixRain();
+        window.addEventListener('resize', resizeMatrixRain);
+        
+        // Matrix characters
+        const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+        const fontSize = 14;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = [];
+        
+        // Initialize drops
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * -100);
+        }
+        
+        // Draw matrix rain
+        function drawMatrixRain() {
+            matrixCtx.fillStyle = 'rgba(10, 10, 18, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            matrixCtx.fillStyle = '#0ff0fc';
+            matrixCtx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+                matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+            
+            requestAnimationFrame(drawMatrixRain);
+        }
+        
+        // Start matrix rain
+        drawMatrixRain();
+        
+        // Matrix rain click interaction
+        matrixCanvas.addEventListener('click', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Create explosion effect
+            for (let i = 0; i < 20; i++) {
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 5 + Math.random() * 5;
+                
+                const particle = {
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * velocity,
+                    vy: Math.sin(angle) * velocity,
+                    life: 1
+                };
+                
+                // Animate particle
+                function animateParticle() {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    particle.life -= 0.02;
+                    particle.vx *= 0.98;
+                    particle.vy *= 0.98;
+                    
+                    if (particle.life > 0) {
+                        matrixCtx.fillStyle = `rgba(0, 255, 65, ${particle.life})`;
+                        matrixCtx.fillRect(particle.x, particle.y, 2, 2);
+                        requestAnimationFrame(animateParticle);
+                    }
+                }
+                
+                animateParticle();
+            }
+        });
+        
+        // Dark Web Mode Toggle
+        const darkWebToggle = document.getElementById('darkWebToggle');
+        
+        darkWebToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-web-mode');
+        });
+        
+        // Skill Tree Toggle
+        const skillTree = document.getElementById('skillTree');
+        const skillTreeToggle = document.getElementById('skillTreeToggle');
+        
+        skillTreeToggle.addEventListener('click', () => {
+            skillTree.classList.toggle('minimized');
+            
+            if (skillTree.classList.contains('minimized')) {
+                skillTreeToggle.innerHTML = '<i class="fas fa-plus"></i>';
+            } else {
+                skillTreeToggle.innerHTML = '<i class="fas fa-minus"></i>';
+            }
+        });
+        
+        // Skill Progress Animation
+        const skillProgressBars = document.querySelectorAll('.skill-progress-bar');
+        
+        function animateSkillProgress() {
+            skillProgressBars.forEach(bar => {
+                const progress = bar.getAttribute('data-progress');
+                bar.style.width = progress + '%';
+            });
+        }
+        
+        // Trigger skill progress animation when skill tree is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillProgress();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(skillTree);
+        
+        // Achievement Badges
+        const achievements = document.querySelectorAll('.achievement');
+        let achievementIndex = 0;
+        
+        function unlockAchievement() {
+            if (achievementIndex < achievements.length) {
+                achievements[achievementIndex].classList.add('unlocked');
+                achievementIndex++;
+            }
+        }
+        
+        // Unlock achievements based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            
+            if (scrollPercentage > 25 && achievementIndex === 0) {
+                unlockAchievement();
+            } else if (scrollPercentage > 50 && achievementIndex === 1) {
+                unlockAchievement();
+            } else if (scrollPercentage > 75 && achievementIndex === 2) {
+                unlockAchievement();
+            }
+        });
+        
+        // Terminal Interaction
+        const terminal = document.getElementById('terminal');
+        const terminalBody = document.getElementById('terminalBody');
+        const terminalInput = document.getElementById('terminalInput');
+        
+        // Terminal commands
+        const terminalCommands = {
+            help: () => {
+                return [
+                    "Available commands:",
+                    "  scan - Scan for vulnerabilities",
+                    "  exploit - Run exploit simulation",
+                    "  encrypt - Encrypt a message",
+                    "  decrypt - Decrypt a message",
+                    "  hack - Start hacking simulation",
+                    "  clear - Clear terminal",
+                    "  about - Learn about CyberSec Academy"
+                ];
+            },
+            scan: () => {
+                return [
+                    "Scanning network...",
+                    "✓ Found 3 devices",
+                    "✓ Identified 2 potential vulnerabilities",
+                    "✓ Scan complete"
+                ];
+            },
+            exploit: () => {
+                return [
+                    "Initializing exploit...",
+                    "✓ Target acquired",
+                    "✓ Exploiting vulnerability...",
+                    "✓ Access granted",
+                    "⚠ This is a simulation only"
+                ];
+            },
+            encrypt: () => {
+                const message = "CyberSec Academy";
+                const encrypted = btoa(message);
+                return [
+                    `Original: ${message}`,
+                    `Encrypted: ${encrypted}`
+                ];
+            },
+            decrypt: () => {
+                const encrypted = "Q3liZXJTZWMgQWNhZGVteQ==";
+                const decrypted = atob(encrypted);
+                return [
+                    `Encrypted: ${encrypted}`,
+                    `Decrypted: ${decrypted}`
+                ];
+            },
+            hack: () => {
+                return [
+                    "Initializing hacking simulation...",
+                    "Brute forcing password...",
+                    "███████████░░░░ 75%",
+                    "███████████████ 100%",
+                    "✓ Password cracked: 'cybersec2025-2026'",
+                    "⚠ This is a simulation only"
+                ];
+            },
+            clear: () => {
+                terminalBody.innerHTML = '';
+                return [];
+            },
+            about: () => {
+                return [
+                    "CyberSec Academy - Master Hacking Skills",
+                    "Learn from experts",
+                    "Hands-on training with real-world scenarios",
+                    "Visit our website for more information"
+                ];
+            }
+        };
+        
+        // Process terminal command
+        function processCommand(command) {
+            const trimmedCommand = command.trim().toLowerCase();
+            
+            if (trimmedCommand === '') {
+                return [];
+            }
+            
+            // Add command to terminal
+            const commandLine = document.createElement('div');
+            commandLine.classList.add('terminal-line');
+            commandLine.innerHTML = `<span class="terminal-prompt">root@cybersec:~$</span> <span class="terminal-command">${command}</span>`;
+            terminalBody.appendChild(commandLine);
+            
+            // Process command
+            if (terminalCommands[trimmedCommand]) {
+                const output = terminalCommands[trimmedCommand]();
+                
+                output.forEach(line => {
+                    const outputLine = document.createElement('div');
+                    outputLine.classList.add('terminal-line');
+                    outputLine.innerHTML = `<span class="terminal-output">${line}</span>`;
+                    terminalBody.appendChild(outputLine);
+                });
+            } else {
+                const errorLine = document.createElement('div');
+                errorLine.classList.add('terminal-line');
+                errorLine.innerHTML = `<span class="terminal-output">Command not found: ${trimmedCommand}. Type 'help' for available commands.</span>`;
+                terminalBody.appendChild(errorLine);
+            }
+            
+            // Scroll to bottom
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+        
+        // Handle terminal input
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value;
+                processCommand(command);
+                terminalInput.value = '';
+            }
+        });
+        
+        // Terminal 3D effect
+        terminal.addEventListener('mousemove', (e) => {
+            const rect = terminal.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            terminal.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        
+        terminal.addEventListener('mouseleave', () => {
+            terminal.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+        
+        // Typing effect for hero section
+        const typingTextElement = document.getElementById('typingText');
+        const texts = [
+            "> Unlock your hacking potential...",
+            "> Master cybersecurity skills...",
+            "> Learn from experts...",
+            "> Start your journey today..."
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeText() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingTextElement.textContent = "> " + currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTextElement.textContent = "> " + currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+            }
+            
+            setTimeout(typeText, isDeleting ? 50 : 100);
+        }
+        
+        // Start typing effect when page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeText, 1000);
+        });
+        
+        // Enroll button functionality - Course Selection Modal
+        document.getElementById('enrollButton').addEventListener('click', function() {
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(5, 5, 8, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 2000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                animation: fadeIn 0.5s ease;
+            `;
+
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(145deg, var(--darker-bg), var(--card-bg));
+                border: 2px solid var(--neon-blue);
+                border-radius: 20px;
+                padding: 3rem;
+                max-width: 900px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                position: relative;
+                box-shadow: 0 0 40px rgba(0, 240, 252, 0.3);
+                animation: slideUp 0.5s ease;
+            `;
+
+            // Create close button
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '<i class="fas fa-times"></i>';
+            closeButton.style.cssText = `
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: transparent;
+                border: none;
+                color: var(--neon-green);
+                font-size: 1.5rem;
+                cursor: pointer;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+            `;
+            
+            closeButton.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(0, 255, 65, 0.1)';
+                this.style.boxShadow = '0 0 15px var(--neon-green)';
+            });
+            
+            closeButton.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.boxShadow = 'none';
+            });
+
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modalOverlay);
+            });
+
+            // Create modal title
+            const modalTitle = document.createElement('h2');
+            modalTitle.textContent = 'SELECT YOUR COURSE';
+            modalTitle.style.cssText = `
+                font-family: 'Orbitron', sans-serif;
+                font-size: 2.5rem;
+                text-align: center;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-shadow: 0 0 15px rgba(0, 240, 252, 0.5);
+            `;
+
+            const modalSubtitle = document.createElement('p');
+            modalSubtitle.textContent = 'Choose your cybersecurity specialization and begin your journey';
+            modalSubtitle.style.cssText = `
+                text-align: center;
+                color: #b0b0b0;
+                margin-bottom: 3rem;
+                font-size: 1.2rem;
+            `;
+
+            // Create courses grid
+            const coursesGrid = document.createElement('div');
+            coursesGrid.style.cssText = `
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+            `;
+
+            // Course data
+            const courses = [
+                {
+                    name: 'Linux Mastery',
+                    subtitle: 'From Beginner to PRO Hacker',
+                    description: 'Master the operating system that powers the cybersecurity world',
+                    icon: 'fas fa-server',
+                    color: 'var(--neon-blue)',
+                    link: 'Linux-Mastery.html'
+                },
+                {
+                    name: 'OSINT Mastery',
+                    subtitle: 'Find ANYTHING Online',
+                    description: 'Learn to find information that doesn\'t want to be found',
+                    icon: 'fas fa-search',
+                    color: 'var(--neon-green)',
+                    link: 'OSINT.html'
+                },
+                {
+                    name: 'Wi-Fi Hacking',
+                    subtitle: 'Attack & Defense Masterclass',
+                    description: 'Understand wireless networks from both attack and defense perspectives',
+                    icon: 'fas fa-wifi',
+                    color: 'var(--neon-purple)',
+                    link: 'Wifi-Hacking.html'
+                }
+            ];
+
+            // Create course cards
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.style.cssText = `
+                    background: rgba(15, 15, 25, 0.8);
+                    border: 1px solid rgba(0, 240, 252, 0.3);
+                    border-radius: 15px;
+                    padding: 2rem;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.4s;
+                    position: relative;
+                    overflow: hidden;
+                `;
+
+                courseCard.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.borderColor = course.color;
+                    this.style.boxShadow = `0 15px 30px ${course.color}40`;
+                });
+
+                courseCard.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.borderColor = 'rgba(0, 240, 252, 0.3)';
+                    this.style.boxShadow = 'none';
+                });
+
+                courseCard.addEventListener('click', function() {
+                    window.location.href = course.link;
+                });
+
+                const courseIcon = document.createElement('i');
+                courseIcon.className = course.icon;
+                courseIcon.style.cssText = `
+                    font-size: 3rem;
+                    color: ${course.color};
+                    margin-bottom: 1rem;
+                    text-shadow: 0 0 15px ${course.color};
+                `;
+
+                const courseName = document.createElement('h3');
+                courseName.textContent = course.name;
+                courseName.style.cssText = `
+                    font-family: 'Orbitron', sans-serif;
+                    font-size: 1.5rem;
+                    margin-bottom: 0.5rem;
+                    color: ${course.color};
+                `;
+
+                const courseSubtitle = document.createElement('p');
+                courseSubtitle.textContent = course.subtitle;
+                courseSubtitle.style.cssText = `
+                    color: var(--neon-green);
+                    font-weight: bold;
+                    margin-bottom: 1rem;
+                    font-size: 0.9rem;
+                `;
+
+                const courseDesc = document.createElement('p');
+                courseDesc.textContent = course.description;
+                courseDesc.style.cssText = `
+                    color: #b0b0b0;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                `;
+
+                courseCard.appendChild(courseIcon);
+                courseCard.appendChild(courseName);
+                courseCard.appendChild(courseSubtitle);
+                courseCard.appendChild(courseDesc);
+                coursesGrid.appendChild(courseCard);
+            });
+
+            // Create footer text
+            const footerText = document.createElement('p');
+            footerText.textContent = 'All courses are hands-on practice, real-world scenarios, and free lifetime access';
+            footerText.style.cssText = `
+                text-align: center;
+                color: #777;
+                font-size: 0.9rem;
+                margin-top: 2rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            `;
+
+            // Assemble modal
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(modalTitle);
+            modalContent.appendChild(modalSubtitle);
+            modalContent.appendChild(coursesGrid);
+            modalContent.appendChild(footerText);
+            modalOverlay.appendChild(modalContent);
+
+            // Add to page
+            document.body.appendChild(modalOverlay);
+
+            // Close modal when clicking outside
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    document.body.removeChild(modalOverlay);
+                }
+            });
+        });
+
+        // Add CSS animations for modal
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideUp {
+                from { 
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to { 
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // User behavior tracking for adaptive personalization
+        let typingSpeed = 0;
+        let cursorPattern = [];
+        let lastCursorTime = Date.now();
+        
+        // Track cursor movement
+        document.addEventListener('mousemove', (e) => {
+            const currentTime = Date.now();
+            const timeDiff = currentTime - lastCursorTime;
+            
+            cursorPattern.push({
+                x: e.clientX,
+                y: e.clientY,
+                time: timeDiff
+            });
+            
+            // Keep only recent cursor movements
+            if (cursorPattern.length > 100) {
+                cursorPattern.shift();
+            }
+            
+            lastCursorTime = currentTime;
+        });
+        
+        // Track typing speed
+        document.addEventListener('keydown', () => {
+            typingSpeed++;
+            
+            // Reset typing speed counter after 5 seconds of inactivity
+            clearTimeout(window.typingSpeedTimeout);
+            window.typingSpeedTimeout = setTimeout(() => {
+                typingSpeed = 0;
+            }, 5000);
+        });
+        
+        // Adaptive interface based on user behavior
+        function adaptInterface() {
+            // Adjust animation speed based on typing speed
+            if (typingSpeed > 20) {
+                // Fast typist - speed up animations
+                document.documentElement.style.setProperty('--animation-speed', '0.5s');
+            } else if (typingSpeed > 10) {
+                // Moderate typist - normal animations
+                document.documentElement.style.setProperty('--animation-speed', '1s');
+            } else {
+                // Slow typist - slow down animations
+                document.documentElement.style.setProperty('--animation-speed', '1.5s');
+            }
+            
+            // Adjust interface based on cursor pattern
+            if (cursorPattern.length > 50) {
+                // Analyze cursor movement pattern
+                let totalDistance = 0;
+                let totalTime = 0;
+                
+                for (let i = 1; i < cursorPattern.length; i++) {
+                    const dx = cursorPattern[i].x - cursorPattern[i-1].x;
+                    const dy = cursorPattern[i].y - cursorPattern[i-1].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    totalDistance += distance;
+                    totalTime += cursorPattern[i].time;
+                }
+                
+                const avgSpeed = totalDistance / totalTime;
+                
+                if (avgSpeed > 2) {
+                    // Fast cursor movement - more interactive elements
+                    document.body.classList.add('fast-cursor');
+                } else {
+                    // Slow cursor movement - fewer distractions
+                    document.body.classList.remove('fast-cursor');
+                }
+            }
+            
+            // Continue adapting
+            setTimeout(adaptInterface, 5000);
+        }
+        
+        // Start adaptive interface
+        adaptInterface();
+        
+        // Personalized learning path based on user behavior
+        function generateLearningPath() {
+            // Analyze user behavior to determine learning path
+            let learningPath = [];
+            
+            if (typingSpeed > 15) {
+                // Fast typist - recommend advanced courses
+                learningPath.push({
+                    title: "Advanced Penetration Testing",
+                    description: "Take your skills to the next level with advanced techniques",
+                    icon: "fas fa-user-ninja"
+                });
+            } else {
+                // Slow typist - recommend beginner courses
+                learningPath.push({
+                    title: "Cybersecurity Fundamentals",
+                    description: "Build a strong foundation in cybersecurity basics",
+                    icon: "fas fa-shield-alt"
+                });
+            }
+            
+            if (cursorPattern.length > 50) {
+                // Active user - recommend practical courses
+                learningPath.push({
+                    title: "Hands-On Hacking Labs",
+                    description: "Practice your skills in realistic environments",
+                    icon: "fas fa-flask"
+                });
+            } else {
+                // Less active user - recommend theoretical courses
+                learningPath.push({
+                    title: "Security Theory & Concepts",
+                    description: "Understand the principles behind cybersecurity",
+                    icon: "fas fa-book"
+                });
+            }
+            
+            return learningPath;
+        }
+        
+        // Display personalized learning path in console
+        console.log("Your Personalized Learning Path:");
+        generateLearningPath().forEach((item, index) => {
+            console.log(`${index + 1}. ${item.title}: ${item.description}`);
+        });
     </script>
 </body>
 </html>

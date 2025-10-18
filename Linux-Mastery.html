@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Mastery: Zero to Hero | CyberSec Academy</title>
+    <meta name="keywords" content="Linux course for hackers, Linux command line mastery, Linux system administration, cybersecurity Linux training, Linux security hardening, bash scripting, Linux for penetration testing, terminal commands, Linux file system, user management Linux, networking Linux, package management, process management, Linux from beginner to expert">
+    <meta name="description" content="[Course-specific description based on your course content]">
+    <meta property="og:title" content="[Course Name] - CyberSec Academy">
+    <meta property="og:description" content="[Brief course description for social sharing]">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-green: #00ff41;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --text-color: #e0e0e0;
+            --dark-web-bg: #020208;
+            --dark-web-card: rgba(10, 5, 15, 0.9);
+            --dark-web-accent: #8b00ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+        
+        body.dark-web-mode {
+            background-color: var(--dark-web-bg);
+            --neon-blue: #8b00ff;
+            --neon-green: #ff00ff;
+            --card-bg: var(--dark-web-card);
+        }
+        
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.7);
+            z-index: 1;
+        }
+        
+        /* Holographic Network Grid */
+        .network-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+        
+        .network-grid canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Cybernetic Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+            opacity: 0.7;
+        }
+        
+        /* Quantum Computing Visualization */
+        .quantum-viz {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .quantum-viz canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(5, 5, 8, 0.9);
+            border-bottom: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-web-mode header {
+            border-bottom-color: var(--dark-web-accent);
+            box-shadow: 0 0 15px rgba(139, 0, 255, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+        
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-green);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+        
+        /* Dark Web Mode Toggle */
+        .dark-web-toggle {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(5, 5, 8, 0.8);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-web-toggle:hover {
+            background-color: rgba(0, 240, 252, 0.1);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        body.dark-web-mode .toggle-switch {
+            background-color: rgba(139, 0, 255, 0.3);
+        }
+        
+        body.dark-web-mode .toggle-slider {
+            transform: translateX(25px);
+            background-color: var(--dark-web-accent);
+        }
+        
+        /* Course Hero Section - ENHANCED WITH LOGO */
+        .course-hero {
+            margin-top: 100px;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        .course-logo-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .course-logo {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 252, 0.4));
+            border: 2px solid rgba(0, 240, 252, 0.3);
+            padding: 15px;
+            background: rgba(5, 5, 15, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            border-radius: 20px;
+            background: radial-gradient(circle, rgba(0, 240, 252, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+        
+        .course-logo-container:hover .logo-glow {
+            opacity: 1;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        
+        .logo-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green), var(--neon-blue)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .course-logo-container:hover .logo-border {
+            opacity: 1;
+        }
+        
+        .course-logo-container:hover .course-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(0, 240, 252, 0.8));
+            border-color: var(--neon-blue);
+        }
+        
+        .course-hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 240, 252, 0.5);
+        }
+        
+        .course-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #b0b0b0;
+        }
+        
+        .progress-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.1);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--darker-bg);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            border-radius: 5px;
+            width: 15%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+        
+        /* Course Content */
+        .course-content {
+            padding: 3rem 0;
+        }
+        
+        .modules-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        .modules-sidebar {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .modules-sidebar h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .modules-list {
+            list-style: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modules-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .modules-list::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+            border-radius: 10px;
+        }
+        
+        .modules-list::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+        }
+        
+        .module-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header {
+            background: var(--darker-bg);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--neon-green);
+            transition: all 0.3s;
+        }
+        
+        .section-header:hover {
+            background: rgba(0, 240, 252, 0.1);
+        }
+        
+        .section-header h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+            font-size: 1rem;
+        }
+        
+        .section-header i {
+            transition: transform 0.3s;
+        }
+        
+        .section-header.collapsed i {
+            transform: rotate(-90deg);
+        }
+        
+        .section-lessons {
+            list-style: none;
+            padding-left: 1rem;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .section-lessons.collapsed {
+            max-height: 0;
+        }
+        
+        .module-item {
+            padding: 1rem;
+            border-left: 3px solid transparent;
+            margin-bottom: 0.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-item:hover {
+            background: rgba(0, 240, 252, 0.1);
+            border-left-color: var(--neon-blue);
+        }
+        
+        .module-item.active {
+            background: rgba(0, 240, 252, 0.15);
+            border-left-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 240, 252, 0.2);
+        }
+        
+        .module-item.completed::before {
+            content: '✓';
+            color: var(--neon-green);
+            margin-right: 0.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+        
+        .module-number {
+            background: var(--darker-bg);
+            color: var(--neon-blue);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .module-item.active .module-number {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+        
+        .video-container {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container:hover {
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.2);
+            border-color: var(--neon-blue);
+        }
+        
+        .video-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .video-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .video-status {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-badge.completed {
+            background: rgba(0, 255, 65, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+        
+        .status-badge.in-progress {
+            background: rgba(0, 240, 252, 0.2);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+        }
+        
+        .video-player {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+        
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-controls {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0, 240, 252, 0.3);
+        }
+        
+        .nav-button {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 0.7rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-button:hover {
+            background: rgba(0, 240, 252, 0.1);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-button:disabled:hover {
+            background: transparent;
+            box-shadow: none;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--neon-blue);
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 240, 252, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.3);
+        }
+        
+        .modal-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--neon-green);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            transform: translateX(150%);
+            transition: transform 0.5s;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+        }
+        
+        /* Matrix Animation */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .modules-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modules-sidebar {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .course-hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .course-logo {
+                max-width: 100%;
+            }
+            
+            .video-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dark-web-toggle {
+                top: 80px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    
+    <!-- Holographic Network Grid -->
+    <div class="network-grid">
+        <canvas id="networkGrid"></canvas>
+    </div>
+    
+    <!-- Cybernetic Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Quantum Computing Visualization -->
+    <div class="quantum-viz">
+        <canvas id="quantumViz"></canvas>
+    </div>
+    
+    <!-- Code Matrix Rain -->
+    <div class="matrix-rain">
+        <canvas id="matrixRain"></canvas>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-terminal"></i>
+                <h1>CYBERSEC ACADEMY</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#courses">Courses</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button" id="progressButton">My Progress</button>
+        </div>
+    </header>
+    
+    <!-- Dark Web Mode Toggle -->
+    <div class="dark-web-toggle" id="darkWebToggle">
+        <span>Dark Web</span>
+        <div class="toggle-switch">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+
+    <!-- Course Hero Section - ENHANCED WITH LOGO -->
+    <section class="course-hero">
+        <div class="container">
+            <!-- Course Logo with Glow Effects -->
+            <div class="course-logo-container">
+                <img src="Images/Linux-Course-Logo.png" alt="Linux Mastery Course" class="course-logo">
+                <div class="logo-glow"></div>
+                <div class="logo-border"></div>
+            </div>
+            
+            <h2>LINUX MASTERY: ZERO TO HERO</h2>
+            <p>Master the operating system that powers the cybersecurity world. From basic commands to advanced system administration.</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Course Progress</span>
+                    <span id="progressPercent">15%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content -->
+    <section class="course-content">
+        <div class="container">
+            <div class="modules-container">
+                <!-- Modules Sidebar -->
+                <div class="modules-sidebar">
+                    <h3>COURSE MODULES</h3>
+                    <div class="modules-list" id="modulesList">
+                        <!-- Modules will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Video Content -->
+                <div class="video-content">
+                    <div class="video-container">
+                        <div class="video-header">
+                            <h3 id="currentVideoTitle">Course Overview</h3>
+                            <div class="video-status">
+                                <span class="status-badge in-progress">In Progress</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-player">
+                            <iframe id="videoPlayer" src="https://archive.org/details/3.-installing-linux-in-virtual-box_202510/1.+Course+Overview.mp4" 
+                                    allowfullscreen></iframe>
+                        </div>
+                        
+                        <div class="video-controls">
+                            <button class="nav-button" id="prevButton" disabled>
+                                <i class="fas fa-arrow-left"></i> Previous Lesson
+                            </button>
+                            <button class="nav-button" id="completeButton">
+                                <i class="fas fa-check"></i> Mark Complete
+                            </button>
+                            <button class="nav-button" id="nextButton">
+                                Next Lesson <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-info">
+                        <h3>About This Lesson</h3>
+                        <p id="videoDescription">This introductory lesson provides an overview of the Linux Mastery course, outlining the skills you'll acquire and the journey from beginner to advanced Linux user.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="completionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Lesson Completed!</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <p>Congratulations! You've completed <span id="completedLessonName">Course Overview</span>. Ready to move on to the next lesson?</p>
+            <div class="video-controls" style="margin-top: 1.5rem; border: none; padding: 0;">
+                <button class="nav-button" id="modalNextButton">
+                    Next Lesson <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <h4>Progress Saved</h4>
+            <p>Your progress has been updated successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        // Course data with archive.org video files
+        const courseModules = [
+            {
+                title: "Course Overview",
+                description: "This introductory lesson provides an overview of the Linux Mastery course, outlining the skills you'll acquire and the journey from beginner to advanced Linux user.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/1.+Course+Overview.mp4",
+                completed: false
+            },
+            {
+                title: "Linux Distributions",
+                description: "Learn about the different flavors of Linux and how to choose the right distribution for your needs.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/2.+Linux+Distributions.mp4",
+                completed: false
+            },
+            {
+                title: "Installing Linux in VirtualBox",
+                description: "Step-by-step guide to setting up a Linux virtual machine for safe practice and experimentation.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/3. Installing Linux in VirtualBox.mp4",
+                completed: false
+            },
+            {
+                title: "Introduction to the Command Line",
+                description: "Get comfortable with the Linux terminal and learn essential navigation commands.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/4. Introduction to the Command Line.mp4",
+                completed: false
+            },
+            {
+                title: "Getting Help on the Command Line",
+                description: "Discover built-in help systems and resources to assist you when working in the terminal.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/5. Getting Help on the Command Line.mp4",
+                completed: false
+            },
+            {
+                title: "Command Line Arguments and Options",
+                description: "Master the use of flags and parameters to customize command behavior.",
+                module: "Module 1: Linux Fundamentals",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/6. Command Line Arguments and Options.mp4",
+                completed: false
+            },
+            {
+                title: "Looking at Text Files: more or less",
+                description: "Learn to view and navigate through text files using more and less commands.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/7. Looking at Text Files more or less.mp4",
+                completed: false
+            },
+            {
+                title: "Another Way to Look at Text Files: cat",
+                description: "Explore the cat command and its various uses for displaying file contents.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/8. Another Way to Look at Text Files cat.mp4",
+                completed: false
+            },
+            {
+                title: "Linux Filesystem Hierarchy Standard",
+                description: "Learn the standard directory structure and purpose of each system directory.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/9. Linux Filesystem Hierarchy Standard.mp4",
+                completed: false
+            },
+            {
+                title: "Devices, Partitions, and Mounting",
+                description: "Understand how Linux handles storage devices and filesystem mounting.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/10.+Devices+Partitions+and+Mounting.mp4",
+                completed: false
+            },
+            {
+                title: "Working with Files and Directories",
+                description: "Learn essential commands for creating, moving, copying, and deleting files and directories.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/11. Working with Files and Directories.mp4",
+                completed: false
+            },
+            {
+                title: "Compressing and Archiving Files",
+                description: "Learn to compress and archive files using tar, gzip, and other utilities.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/12. Compressing and Archiving Files.mp4",
+                completed: false
+            },
+            {
+                title: "Searching the Filesystem",
+                description: "Master the find and locate commands to quickly find files and directories.",
+                module: "Module 2: File System Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/13. Searching the Filesystem.mp4",
+                completed: false
+            },
+            {
+                title: "Working with users and Groups",
+                description: "Learn user and group management including creation, modification, and deletion.",
+                module: "Module 3: User Management & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/14. Working with users and Groups.mp4",
+                completed: false
+            },
+            {
+                title: "File and Directory Permissions",
+                description: "Understand Linux permission systems and how to modify them for security.",
+                module: "Module 3: User Management & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/15. File and Directory Permissions.mp4",
+                completed: false
+            },
+            {
+                title: "Changing Users",
+                description: "Learn to switch between user accounts and execute commands as different users.",
+                module: "Module 3: User Management & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/16. Changing Users.mp4",
+                completed: false
+            },
+            {
+                title: "Changing Passwords",
+                description: "Manage user passwords and password policies in Linux.",
+                module: "Module 3: User Management & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/17. Changing Passwords.mp4",
+                completed: false
+            },
+            {
+                title: "Installing Software",
+                description: "Introduction to different methods of installing software on Linux systems.",
+                module: "Module 4: Software Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/18. Installing Software.mp4",
+                completed: false
+            },
+            {
+                title: "Linux Package Management",
+                description: "Overview of package management systems used across different Linux distributions.",
+                module: "Module 4: Software Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/19. Linux Package Management.mp4",
+                completed: false
+            },
+            {
+                title: "Package Management: Debian Systems",
+                description: "Detailed guide to using apt and dpkg for package management on Debian-based systems.",
+                module: "Module 4: Software Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/20. Package Management Debian Systems.mp4",
+                completed: false
+            },
+            {
+                title: "Manually Installing Software",
+                description: "Learn to compile and install software from source code.",
+                module: "Module 4: Software Management",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/21. Manually Installing Software.mp4",
+                completed: false
+            },
+            {
+                title: "Networking at the Command Line",
+                description: "Essential network troubleshooting and configuration commands.",
+                module: "Module 5: Networking & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/22. Networking at the Command Line.mp4",
+                completed: false
+            },
+            {
+                title: "Keep Yourself Anonymous Online",
+                description: "Learn to Protect your presence online and hide your tracks.",
+                module: "Module 5: Networking & Security",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/23. Keep Yourself Anonymous Online.mp4",
+                completed: false
+            },
+            {
+                title: "Text Editors: nano",
+                description: "Introduction to the nano text editor for quick file editing.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/24. Text Editors nano.mp4",
+                completed: false
+            },
+            {
+                title: "Text Editors: vim",
+                description: "Master the powerful vim text editor with its modal editing system.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/25. Text Editors vim.mp4",
+                completed: false
+            },
+            {
+                title: "Text Editors: MousePad",
+                description: "Introduction to the Mousepad text editor for quick file editing Using GUI.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/26. Text Editors MousePad.mp4",
+                completed: false
+            },
+            {
+                title: "Process Information",
+                description: "Learn to view and monitor running processes on your system.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/27. Process Information.mp4",
+                completed: false
+            },
+            {
+                title: "Managing Processes",
+                description: "Learn to control processes with signals, priorities, and job control.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/28. Managing Processes.mp4",
+                completed: false
+            },
+            {
+                title: "Bash Scripting: Basics",
+                description: "Introduction to bash scripting for automating tasks.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/29. Bash Scripting Basics.mp4",
+                completed: false
+            },
+            {
+                title: "Course Conclusion",
+                description: "Review of key concepts and next steps for continuing your Linux journey.",
+                module: "Module 6: Text Editors & Scripting",
+                videoFile: "https://archive.org/embed/3.-installing-linux-in-virtual-box_202510/30. Course Conclusion.mp4",
+                completed: false
+            }
+        ];
+
+        // Current video index
+        let currentVideoIndex = 0;
+
+        // DOM Elements
+        const modulesList = document.getElementById('modulesList');
+        const currentVideoTitle = document.getElementById('currentVideoTitle');
+        const videoDescription = document.getElementById('videoDescription');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const completeButton = document.getElementById('completeButton');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const completionModal = document.getElementById('completionModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalNextButton = document.getElementById('modalNextButton');
+        const completedLessonName = document.getElementById('completedLessonName');
+        const notification = document.getElementById('notification');
+        const progressButton = document.getElementById('progressButton');
+
+        // Initialize the page
+        function initPage() {
+            renderModulesList();
+            updateVideoContent();
+            updateProgress();
+            
+            // Event listeners
+            prevButton.addEventListener('click', goToPrevVideo);
+            nextButton.addEventListener('click', goToNextVideo);
+            completeButton.addEventListener('click', completeCurrentVideo);
+            closeModal.addEventListener('click', () => completionModal.style.display = 'none');
+            modalNextButton.addEventListener('click', () => {
+                completionModal.style.display = 'none';
+                goToNextVideo();
+            });
+            
+            // Progress button functionality
+            progressButton.addEventListener('click', showProgressModal);
+            
+            // Close modal when clicking outside
+            completionModal.addEventListener('click', (e) => {
+                if (e.target === completionModal) {
+                    completionModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Render the modules list with collapsible sections
+        function renderModulesList() {
+            modulesList.innerHTML = '';
+            
+            // Group lessons by module
+            const modules = {};
+            courseModules.forEach((lesson, index) => {
+                if (!modules[lesson.module]) {
+                    modules[lesson.module] = [];
+                }
+                modules[lesson.module].push({...lesson, index});
+            });
+            
+            // Create sections for each module
+            Object.keys(modules).forEach(moduleName => {
+                const moduleSection = document.createElement('div');
+                moduleSection.className = 'module-section';
+                
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = 'section-header';
+                sectionHeader.innerHTML = `
+                    <h4>${moduleName}</h4>
+                    <i class="fas fa-chevron-down"></i>
+                `;
+                
+                const sectionLessons = document.createElement('ul');
+                sectionLessons.className = 'section-lessons';
+                
+                // Add lessons to the section
+                modules[moduleName].forEach(lesson => {
+                    const moduleItem = document.createElement('li');
+                    moduleItem.className = `module-item ${lesson.index === currentVideoIndex ? 'active' : ''} ${lesson.completed ? 'completed' : ''}`;
+                    
+                    const moduleNumber = document.createElement('div');
+                    moduleNumber.className = 'module-number';
+                    moduleNumber.textContent = lesson.index + 1;
+                    
+                    const moduleText = document.createElement('div');
+                    moduleText.textContent = lesson.title;
+                    
+                    moduleItem.appendChild(moduleNumber);
+                    moduleItem.appendChild(moduleText);
+                    
+                    moduleItem.addEventListener('click', () => {
+                        currentVideoIndex = lesson.index;
+                        updateVideoContent();
+                        renderModulesList();
+                    });
+                    
+                    sectionLessons.appendChild(moduleItem);
+                });
+                
+                // Toggle section collapse
+                sectionHeader.addEventListener('click', () => {
+                    sectionHeader.classList.toggle('collapsed');
+                    sectionLessons.classList.toggle('collapsed');
+                });
+                
+                moduleSection.appendChild(sectionHeader);
+                moduleSection.appendChild(sectionLessons);
+                modulesList.appendChild(moduleSection);
+            });
+        }
+
+        // Update video content based on current index
+        function updateVideoContent() {
+            const currentModule = courseModules[currentVideoIndex];
+            
+            currentVideoTitle.textContent = currentModule.title;
+            videoDescription.textContent = currentModule.description;
+            
+            // Update video source
+            videoPlayer.src = currentModule.videoFile;
+            
+            // Update button states
+            prevButton.disabled = currentVideoIndex === 0;
+            nextButton.disabled = currentVideoIndex === courseModules.length - 1;
+            
+            // Update complete button text
+            completeButton.innerHTML = currentModule.completed ? 
+                '<i class="fas fa-redo"></i> Mark Incomplete' : 
+                '<i class="fas fa-check"></i> Mark Complete';
+                
+            // Update module status badge
+            const statusBadge = document.querySelector('.status-badge');
+            if (currentModule.completed) {
+                statusBadge.className = 'status-badge completed';
+                statusBadge.textContent = 'Completed';
+            } else {
+                statusBadge.className = 'status-badge in-progress';
+                statusBadge.textContent = 'In Progress';
+            }
+        }
+
+        // Go to previous video
+        function goToPrevVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+                updateVideoContent();
+                renderModulesList();
+            }
+        }
+
+        // Go to next video
+        function goToNextVideo() {
+            if (currentVideoIndex < courseModules.length - 1) {
+                currentVideoIndex++;
+                updateVideoContent();
+                renderModulesList();
+            }
+        }
+
+        // Complete current video
+        function completeCurrentVideo() {
+            const currentModule = courseModules[currentVideoIndex];
+            
+            if (currentModule.completed) {
+                currentModule.completed = false;
+                updateVideoContent();
+                updateProgress();
+                showNotification('Progress updated');
+            } else {
+                currentModule.completed = true;
+                updateVideoContent();
+                updateProgress();
+                
+                // Show completion modal if not the last video
+                if (currentVideoIndex < courseModules.length - 1) {
+                    completedLessonName.textContent = currentModule.title;
+                    completionModal.style.display = 'flex';
+                } else {
+                    showNotification('Congratulations! Course completed!');
+                }
+            }
+            
+            renderModulesList();
+        }
+
+        // Update progress bar and percentage
+        function updateProgress() {
+            const completedCount = courseModules.filter(module => module.completed).length;
+            const progress = (completedCount / courseModules.length) * 100;
+            
+            progressFill.style.width = `${progress}%`;
+            progressPercent.textContent = `${Math.round(progress)}%`;
+        }
+
+        // Show notification
+        function showNotification(message) {
+            notification.querySelector('h4').textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show progress modal
+        function showProgressModal() {
+            const completedCount = courseModules.filter(module => module.completed).length;
+            const totalCount = courseModules.length;
+            const progress = Math.round((completedCount / totalCount) * 100);
+            
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <h3>Your Course Progress</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 4rem; color: var(--neon-green); margin-bottom: 1rem;">${progress}%</div>
+                    <p>You've completed ${completedCount} out of ${totalCount} lessons</p>
+                    <div style="background: var(--darker-bg); height: 20px; border-radius: 10px; margin: 2rem 0; overflow: hidden;">
+                        <div style="height: 100%; background: linear-gradient(to right, var(--neon-blue), var(--neon-green)); width: ${progress}%; transition: width 0.5s;"></div>
+                    </div>
+                    <p style="color: #b0b0b0;">Keep going! You're making great progress in your Linux mastery journey.</p>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close modal functionality
+            const closeBtn = modalContent.querySelector('.close-modal');
+            closeBtn.addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        // Dark Web Mode Toggle
+        const darkWebToggle = document.getElementById('darkWebToggle');
+        darkWebToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-web-mode');
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initPage();
+        });
+    </script>
+</body>
+</html>
